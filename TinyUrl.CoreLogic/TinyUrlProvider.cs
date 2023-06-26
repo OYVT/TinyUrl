@@ -18,6 +18,9 @@ namespace TinyUrl.CoreLogic
             if (await _dataAccess.HasCode(urlInfo.Code))
                 throw new CodeExistsException(urlInfo.Code);
 
+            if (!Uri.IsWellFormedUriString(urlInfo.Url, UriKind.RelativeOrAbsolute))
+                throw new InvalidUrlException(urlInfo.Url);
+
             await _dataAccess.AddNewUrlAsync(urlInfo);
         }
 

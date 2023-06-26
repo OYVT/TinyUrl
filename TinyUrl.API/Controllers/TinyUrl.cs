@@ -30,6 +30,10 @@ namespace TinyUrl.API.Controllers
             {
                 return BadRequest(codeExistsException.Message);
             }
+            catch (InvalidUrlException invalidUrlException)
+            {
+                return BadRequest(invalidUrlException.Message);
+            }
 
             return Ok();
         }
